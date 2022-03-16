@@ -20,6 +20,11 @@ const userReducer = (state: any = INITIAL_STATE, action: any) => {
         ...state,
         currentUser: action.payload,
       };
+    case UserActionTypes.SET_USERNAME:
+      return {
+        ...state,
+        currentUser: { username: action.payload },
+      };
     default:
       return state;
   }

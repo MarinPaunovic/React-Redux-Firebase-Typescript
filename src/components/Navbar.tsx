@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <NavbarStyle>
-      <div className="NavbarTitle">Piggy Bank</div>
+      <div className="NavbarTitle">BOXER</div>
       {theme && theme === "dark" ? (
         <button
           className="material-icons-outlined"

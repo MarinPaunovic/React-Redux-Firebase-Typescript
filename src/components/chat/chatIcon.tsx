@@ -2,17 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleChat } from "../../redux/chat/chatActions";
 import { RootState } from "../../redux/rootReducer";
 import CustomButton from "../custom-button/customButton";
+import { ChatIconStyle } from "../styled-components/chatIconStyle";
 import Chat from "./chat";
 
 const ChatIcon = () => {
   const dispatch = useDispatch();
   const { hidden } = useSelector((reducer: RootState) => reducer.chat);
   return (
-    <div>
+    <ChatIconStyle>
       {!hidden ? (
         <CustomButton
           onClick={() => dispatch(toggleChat())}
-          style={{ position: "absolute", bottom: "15px", left: "5px" }}
+          className="ChatIconToggle"
         >
           Chat
         </CustomButton>
@@ -21,7 +22,7 @@ const ChatIcon = () => {
           <Chat />
         </div>
       )}
-    </div>
+    </ChatIconStyle>
   );
 };
 

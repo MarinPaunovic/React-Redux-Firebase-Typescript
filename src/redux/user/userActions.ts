@@ -1,5 +1,15 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../db/db";
+import {
+  addDoc,
+  doc,
+  collection,
+  getDocs,
+  query,
+  setDoc,
+  where,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { auth, db } from "../../db/db";
 import { UserActionTypes } from "./userTypes";
 export const LoginAction = (user: any) => ({
   type: UserActionTypes.LOGIN,
@@ -27,5 +37,21 @@ export const getUser = (id: string) => {
       type: UserActionTypes.GET,
       payload: user,
     });
+  };
+};
+
+export const setUsername = (username: string) => {
+  return async (dispatch: any) => {
+    getDocs(
+      query(collection(db, "Users"), where("id", "==", auth.currentUser.uid))
+    ).then((item) => {
+      item.docs.map((item) => {
+        updateDoc(doc(db, "Users", item.id), {
+          username,
+        });
+      });
+    });
+
+    dispatch({ type: UserActionTypes.SET_USERNAME, payload: username });
   };
 };

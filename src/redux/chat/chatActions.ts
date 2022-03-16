@@ -6,21 +6,32 @@ import {
   collection,
   onSnapshot,
   serverTimestamp,
+  limitToLast,
+  orderBy,
+  query,
 } from "firebase/firestore";
 
-import { auth, db } from "../../db/db";
+import { db } from "../../db/db";
 import { ChatTypes } from "./chatTypes";
 
 export const getMessages = () => {
   return async (dispatch: any) => {
-    onSnapshot(collection(db, "Messages"), (doc: any) => {
-      let messages = doc.docs.map((item: any) => item);
-      dispatch({ type: ChatTypes.GET, payload: messages });
-    });
+    onSnapshot(
+      query(
+        collection(db, "Messages"),
+        limitToLast(5),
+        orderBy("createdAtServer")
+      ),
+      (doc: any) => {
+        let messages = doc.docs.map((item: any) => item);
+
+        dispatch({ type: ChatTypes.GET, payload: messages });
+      }
+    );
   };
 };
 export const sendMessage = (message: any, username: any, id: any) => {
-  return (dispatch: any) => {
+  return () => {
     if (!message) {
       return;
     }
@@ -28,7 +39,14 @@ export const sendMessage = (message: any, username: any, id: any) => {
       message: message,
       id: id,
       username,
-      createdAt: serverTimestamp(),
+      createdAtLocal: new Date().toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      }),
+      createdAtServer: serverTimestamp(),
     });
   };
 };
