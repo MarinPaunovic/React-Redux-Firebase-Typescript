@@ -1,0 +1,7 @@
+export const ChatTypes = {
+  SEND: "SEND_MESSAGE",
+  DELETE: "DELETE_MESSAGE",
+  LIKE: "LIKE_MESSAGE",
+  GET: "GET_MESSAGES",
+  TOGGLE: "TOGGLE_CHAT",
+};
