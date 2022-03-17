@@ -34,6 +34,10 @@ export const RegisterStyle = styled.div`
     border-width: 0.5px;
     width: fit-content;
   }
+  button:hover {
+    cursor: pointer;
+    background-color: lightgray;
+  }
   label {
     margin-bottom: 15px;
     color: ${({ theme: { fontColor } }) => fontColor};

@@ -3,13 +3,13 @@ import CustomButton from "../custom-button/customButton";
 import FormInput from "../form-input/formInput";
 import { auth, signInWithGoogle } from "../../db/db";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
-import { getUser, setUser } from "../../redux/user/userActions";
+import { setUser } from "../../redux/user/userActions";
+import { RegisterStyle } from "../styled-components/registerStyle";
 
 const LoginComponent = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,12 +18,12 @@ const LoginComponent = () => {
     signInWithEmailAndPassword(auth, email, password);
     setEmail("");
     setPassword("");
-    navigate("/");
   };
   return (
-    <div>
+    <RegisterStyle>
       {" "}
       <form onSubmit={handleSubmit}>
+        <label>Login</label>
         <FormInput
           type="email"
           placeholder="Email.."
@@ -49,14 +49,13 @@ const LoginComponent = () => {
               dispatch(
                 setUser({ email: user.email, id: user.uid, username: "" })
               );
-              navigate("/");
             })
           }
         >
           Login with google
         </CustomButton>
       </form>
-    </div>
+    </RegisterStyle>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
+import { isEmpty } from "react-redux-firebase";
 import { auth, db } from "../../db/db";
 import { UserActionTypes } from "./userTypes";
 
@@ -42,21 +43,30 @@ export const getUser = (id: string) => {
 };
 
 export const setUser = (user: any) => {
-  return (dispatch: any) => {
-    addDoc(collection(db, "Users"), {
-      email: user.email,
-      id: user.id,
-      username: user.username,
-      createdAt: new Date().toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }),
-    });
-    dispatch({ type: UserActionTypes.SET_USER, payload: user });
+  return async (dispatch: any) => {
+    let checkUser = await getDocs(
+      query(collection(db, "Users"), where("id", "==", user.id))
+    );
+    if (isEmpty(checkUser)) {
+      addDoc(collection(db, "Users"), {
+        email: user.email,
+        id: user.id,
+        username: user.username,
+        createdAt: new Date().toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        }),
+      });
+      dispatch({ type: UserActionTypes.SET_USER, payload: user });
+    } else {
+      let data = checkUser.docs.map((item) => ({ ...item.data() }));
+      let userExsist = Object.assign({}, ...data);
+      dispatch({ type: UserActionTypes.SET_USER, payload: userExsist });
+    }
   };
 };
 
