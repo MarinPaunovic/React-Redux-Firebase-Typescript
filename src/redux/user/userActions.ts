@@ -11,12 +11,13 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../../db/db";
 import { UserActionTypes } from "./userTypes";
-export const LoginAction = (user: any) => ({
+
+export const loginAction = (user: any) => ({
   type: UserActionTypes.LOGIN,
   payload: user,
 });
 
-export const LogoutAction = () => ({
+export const logoutAction = () => ({
   type: UserActionTypes.LOGOUT,
 });
 
@@ -34,9 +35,28 @@ export const getUser = (id: string) => {
     let user = Object.assign({}, ...data);
 
     dispatch({
-      type: UserActionTypes.GET,
+      type: UserActionTypes.GET_USER,
       payload: user,
     });
+  };
+};
+
+export const setUser = (user: any) => {
+  return (dispatch: any) => {
+    addDoc(collection(db, "Users"), {
+      email: user.email,
+      id: user.id,
+      username: user.username,
+      createdAt: new Date().toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }),
+    });
+    dispatch({ type: UserActionTypes.SET_USER, payload: user });
   };
 };
 

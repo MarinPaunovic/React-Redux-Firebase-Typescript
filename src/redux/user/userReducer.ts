@@ -15,7 +15,7 @@ const userReducer = (state: any = INITIAL_STATE, action: any) => {
         ...state,
         currentUser: null,
       };
-    case UserActionTypes.GET:
+    case UserActionTypes.GET_USER:
       return {
         ...state,
         currentUser: action.payload,
@@ -23,7 +23,12 @@ const userReducer = (state: any = INITIAL_STATE, action: any) => {
     case UserActionTypes.SET_USERNAME:
       return {
         ...state,
-        currentUser: { username: action.payload },
+        currentUser: { ...state.currentUser, username: action.payload },
+      };
+    case UserActionTypes.SET_USER:
+      return {
+        ...state,
+        currentUser: action.payload,
       };
     default:
       return state;

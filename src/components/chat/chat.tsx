@@ -53,7 +53,7 @@ const Chat = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch(sendMessage(message, currUser.username, currUser.id));
+            dispatch(sendMessage(message, currUser.username));
             setMessage("");
           }}
         >

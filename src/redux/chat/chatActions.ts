@@ -11,7 +11,7 @@ import {
   query,
 } from "firebase/firestore";
 
-import { db } from "../../db/db";
+import { auth, db } from "../../db/db";
 import { ChatTypes } from "./chatTypes";
 
 export const getMessages = () => {
@@ -30,14 +30,15 @@ export const getMessages = () => {
     );
   };
 };
-export const sendMessage = (message: any, username: any, id: any) => {
+export const sendMessage = (message: any, username: any) => {
   return () => {
     if (!message) {
       return;
     }
+
     addDoc(collection(db, "Messages"), {
       message: message,
-      id: id,
+      id: auth.currentUser.uid,
       username,
       createdAtLocal: new Date().toLocaleDateString("en-GB", {
         day: "numeric",

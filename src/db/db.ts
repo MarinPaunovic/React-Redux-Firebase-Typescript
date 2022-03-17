@@ -1,12 +1,5 @@
-import firebase, { initializeApp } from "firebase/app";
-import {
-  addDoc,
-  collection,
-  getDocs,
-  getFirestore,
-  where,
-  query,
-} from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import { getAuth, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 
@@ -25,19 +18,4 @@ export const auth: any = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () =>
-  signInWithPopup(auth, provider).then(async (doc) => {
-    localStorage.setItem("userAuth", "true");
-    const user = await getDocs(
-      query(collection(db, "Users"), where("id", "==", doc.user.uid))
-    );
-    if (!user.empty) {
-      return;
-    } else {
-      addDoc(collection(db, "Users"), {
-        email: doc.user.email,
-        id: doc.user.uid,
-        name: doc.user.displayName,
-      });
-    }
-  });
+export const signInWithGoogle = () => signInWithPopup(auth, provider);

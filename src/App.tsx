@@ -19,7 +19,6 @@ const App = () => {
   const user = useSelector((reducer: RootState) => reducer.user.currentUser);
   const theme = useSelector((reducer: RootState) => reducer.theme.theme);
   const dispatch = useDispatch();
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

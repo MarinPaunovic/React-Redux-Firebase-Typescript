@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../db/db";
-import { LogoutAction } from "../../redux/user/userActions";
+import { logoutAction } from "../../redux/user/userActions";
 import CustomButton from "../custom-button/customButton";
 
 const Logout = () => {
@@ -10,7 +10,7 @@ const Logout = () => {
 
   const handleLogout = () => {
     auth.signOut();
-    dispatch(LogoutAction());
+    dispatch(logoutAction());
     navigate("/login");
   };
 

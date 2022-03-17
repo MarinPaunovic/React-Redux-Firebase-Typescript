@@ -4,21 +4,21 @@ import FormInput from "../form-input/formInput";
 import { auth, signInWithGoogle } from "../../db/db";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getUser, setUser } from "../../redux/user/userActions";
 
 const LoginComponent = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      signInWithEmailAndPassword(auth, email, password);
-      setEmail("");
-      setPassword("");
-      navigate("/");
-    } else alert("passwords dont match!");
+    signInWithEmailAndPassword(auth, email, password);
+    setEmail("");
+    setPassword("");
+    navigate("/");
   };
   return (
     <div>
@@ -38,19 +38,17 @@ const LoginComponent = () => {
           value={password}
           handleChange={setPassword}
         />
-        <FormInput
-          placeholder="Confirm password.."
-          type={"password"}
-          required
-          value={confirmPassword}
-          handleChange={setConfirmPassword}
-        />
+        <label>
+          Dont have account yet? Register <a href="/register">here</a>
+        </label>
         <CustomButton type="submit">Login</CustomButton>
         <CustomButton
           type="button"
           onClick={() =>
-            signInWithGoogle().then(() => {
-              localStorage.setItem("userAuth", "true");
+            signInWithGoogle().then(({ user }) => {
+              dispatch(
+                setUser({ email: user.email, id: user.uid, username: "" })
+              );
               navigate("/");
             })
           }
