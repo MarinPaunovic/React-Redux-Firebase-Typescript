@@ -47,7 +47,7 @@ export const setUser = (user: any) => {
     let checkUser = await getDocs(
       query(collection(db, "Users"), where("id", "==", user.id))
     );
-    if (isEmpty(checkUser)) {
+    if (isEmpty(checkUser.docs)) {
       addDoc(collection(db, "Users"), {
         email: user.email,
         id: user.id,

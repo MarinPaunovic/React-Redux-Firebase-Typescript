@@ -33,6 +33,7 @@ const App = () => {
           {" "}
           {user ? (
             <>
+              {console.log(user)}
               {user.username ? (
                 <>
                   <Route path="/" element={<Homepage />} />

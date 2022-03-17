@@ -21,7 +21,17 @@ const Chat = () => {
   useEffect(() => {
     dispatch(getMessages());
   }, []);
+  const handleKeyPress = (e: any) => {
+    if (e.keyCode === 13) {
+      handleSubmit(e);
+    }
+  };
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    dispatch(sendMessage(message, currUser.username));
+    setMessage("");
+  };
   return (
     <>
       <ChatStyle>
@@ -50,13 +60,7 @@ const Chat = () => {
               </div>
             ))}
         </div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(sendMessage(message, currUser.username));
-            setMessage("");
-          }}
-        >
+        <form onKeyPress={handleKeyPress} onSubmit={handleSubmit}>
           <div className="ChatInput">
             <FormInput
               value={message}

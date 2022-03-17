@@ -17,7 +17,7 @@ export const ChatStyle = styled.div`
   }
   .CloseChatButton {
     position: absolute;
-    left: 218px;
+    left: 243px;
     top: 3px;
     border-radius: 15px;
     border: solid;
