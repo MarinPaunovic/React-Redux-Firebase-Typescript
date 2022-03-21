@@ -34,13 +34,15 @@ export const ChatStyle = styled.div`
     margin-top: 10px;
     margin-bottom: 10px;
     overflow: hidden;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
   .IsHisMessage {
     display: flex;
     flex-direction: column;
     padding: 5px;
     border: solid;
-    max-width: 100px;
+    max-width: 125px;
     color: skyblue;
     align-self: end;
     margin-bottom: 5px;

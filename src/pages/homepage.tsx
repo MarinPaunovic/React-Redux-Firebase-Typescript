@@ -1,12 +1,15 @@
 import Chat from "../components/chat/chat";
 import ChatIcon from "../components/chat/chatIcon";
 import Directory from "../components/directory/directoryComponent";
+import { HomepageStyle } from "../components/styled-components/homepageStyle";
 
 const Homepage = () => {
   return (
     <div className="homepage">
-      <Directory />
-      <ChatIcon />
+      <HomepageStyle>
+        <Directory />
+        <ChatIcon />
+      </HomepageStyle>
     </div>
   );
 };

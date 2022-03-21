@@ -6,6 +6,7 @@ import { RootState } from "../redux/rootReducer";
 import { Link } from "react-router-dom";
 import { setTheme } from "../redux/theme/themeActions";
 import { NavbarStyle } from "./styled-components/navbarStyle";
+import PlayerStatisticComponent from "./playerStatistic/playerStatisticComponent";
 
 const Navbar = () => {
   const user = useSelector((reducer: RootState) => reducer.user.currentUser);
@@ -16,6 +17,11 @@ const Navbar = () => {
   return (
     <NavbarStyle>
       <div className="NavbarTitle">BOXER</div>
+      <PlayerStatisticComponent />
+      <Link to="/">
+        <span>HOME</span>
+      </Link>
+      {user && <Logout />}
       {theme && theme === "dark" ? (
         <button
           className="material-icons-outlined"
@@ -31,12 +37,6 @@ const Navbar = () => {
           dark_mode
         </button>
       )}
-      <Link to="/shop">SHOP</Link>
-      <Link to="/">HOME</Link>
-      {user && <Logout />}
-      <CartIcon />
-
-      {!hidden && <Cart />}
     </NavbarStyle>
   );
 };

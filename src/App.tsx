@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Homepage from "./pages/homepage";
 import {
@@ -9,10 +8,7 @@ import {
 } from "react-router-dom";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import { auth } from "./db/db";
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "./redux/user/userActions";
+import { useSelector } from "react-redux";
 import { RootState } from "./redux/rootReducer";
 import ShopPage from "./pages/shopPage";
 import { ThemeProvider } from "styled-components";
@@ -22,8 +18,8 @@ import Username from "./pages/username";
 
 const App = () => {
   const user = useSelector((reducer: RootState) => reducer.user.currentUser);
-
   const theme = useSelector((reducer: RootState) => reducer.theme.theme);
+
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <GlobalStyle />
@@ -33,7 +29,6 @@ const App = () => {
           {" "}
           {user ? (
             <>
-              {console.log(user)}
               {user.username ? (
                 <>
                   <Route path="/" element={<Homepage />} />
