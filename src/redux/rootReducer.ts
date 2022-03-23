@@ -1,20 +1,20 @@
 import userReducer from "./user/userReducer";
 import { combineReducers } from "redux";
-import cartReducer from "./cart/cartReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import chatReducer from "./chat/chatReducer";
 import { themeReducer } from "./theme/themeReducer";
+import playerReducer from "./player/playerReducer";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart", "user"],
+  whitelist: ["user", "player"],
 };
 
 const rootReducer = combineReducers({
   user: userReducer,
-  cart: cartReducer,
+  player: playerReducer,
   chat: chatReducer,
   theme: themeReducer,
 });

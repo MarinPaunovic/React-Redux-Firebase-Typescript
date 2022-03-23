@@ -8,17 +8,30 @@ import {
 } from "react-router-dom";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/rootReducer";
 import ShopPage from "./pages/shopPage";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./components/styled-components/globalStyle";
 import { lightTheme, darkTheme } from "./components/styled-components/themes";
 import Username from "./pages/username";
+import { useEffect } from "react";
+import { setPlayer } from "./redux/player/playerAction";
+import { auth } from "./db/db";
+import { onAuthStateChanged } from "firebase/auth";
 
 const App = () => {
   const user = useSelector((reducer: RootState) => reducer.user.currentUser);
   const theme = useSelector((reducer: RootState) => reducer.theme.theme);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(setPlayer(auth.currentUser.uid));
+      }
+    });
+  }, []);
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
