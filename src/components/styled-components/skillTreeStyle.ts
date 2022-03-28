@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SkillTreeStyle = styled.div`
   .SkillGrid {
     font-size: 25px;
-    margin-top: 170px;
+    margin-top: 65%;
     position: relative;
     left: -25px;
     display: grid;

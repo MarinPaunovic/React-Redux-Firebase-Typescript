@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 
 import { auth } from "../../db/db";
-import { playerLogout } from "../../redux/player/playerAction";
+import { playerLogout } from "../../redux/player/playerSlice";
 import { logoutAction } from "../../redux/user/userActions";
 import CustomButton from "../custom-button/customButton";
 

@@ -4,7 +4,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import chatReducer from "./chat/chatReducer";
 import { themeReducer } from "./theme/themeReducer";
-import playerReducer from "./player/playerReducer";
+import playerReducer from "./player/playerSlice";
 
 const persistConfig = {
   key: "root",

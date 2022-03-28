@@ -9,7 +9,7 @@ export const PlayerIconStlye = styled.div`
     position: absolute;
     top: 15%;
     left: 50%;
-    margin-left: -203px;
+    margin-left: -214.3px;
     color: red;
     border: solid ${({ theme }) => theme.borderColor};
     padding: 25px 50px;

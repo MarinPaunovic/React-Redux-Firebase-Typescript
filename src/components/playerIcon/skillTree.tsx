@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSkill } from "../../redux/player/playerAction";
+import { setSkillAction } from "../../redux/player/playerSlice";
 import { RootState } from "../../redux/rootReducer";
 import { SkillTreeStyle } from "../styled-components/skillTreeStyle";
 
@@ -10,7 +9,7 @@ const SkillTree = () => {
   );
   const dispatch = useDispatch();
   const handleClick = (skillToChange: string, operation: string) => {
-    dispatch(setSkill(skillToChange, operation, id));
+    dispatch(setSkillAction(skillToChange, operation, id));
   };
   return (
     <SkillTreeStyle>

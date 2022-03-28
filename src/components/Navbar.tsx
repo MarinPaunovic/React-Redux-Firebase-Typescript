@@ -17,7 +17,10 @@ const Navbar = () => {
       <div className="NavbarTitle">BOXER</div>
       <PlayerStatisticComponent />
       <Link to="/">
-        <span>HOME</span>
+        <span>Home</span>
+      </Link>
+      <Link to="/battle">
+        <span>Battle</span>
       </Link>
       {user && <Logout />}
       {theme && theme === "dark" ? (

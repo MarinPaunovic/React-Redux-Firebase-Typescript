@@ -10,29 +10,34 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/rootReducer";
-import ShopPage from "./pages/shopPage";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./components/styled-components/globalStyle";
 import { lightTheme, darkTheme } from "./components/styled-components/themes";
 import Username from "./pages/username";
 import { useEffect } from "react";
-import { setPlayer } from "./redux/player/playerAction";
+import { setPlayerAction } from "./redux/player/playerSlice";
 import { auth } from "./db/db";
 import { onAuthStateChanged } from "firebase/auth";
+import PvE from "./components/battle/pve";
 
 const App = () => {
   const user = useSelector((reducer: RootState) => reducer.user.currentUser);
+  const username = useSelector(
+    (reducer: RootState) => reducer.player.player.username
+  );
   const theme = useSelector((reducer: RootState) => reducer.theme.theme);
-
   const dispatch = useDispatch();
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(setPlayer(auth.currentUser.uid));
+    let unsub = onAuthStateChanged(auth, () => {
+      if (user && !username) {
+        dispatch(setPlayerAction());
       }
     });
-  }, []);
-
+    return () => {
+      unsub();
+    };
+  }, [auth.currentUser]);
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <GlobalStyle />
@@ -45,7 +50,7 @@ const App = () => {
               {user.username ? (
                 <>
                   <Route path="/" element={<Homepage />} />
-                  <Route path="/shop" element={<ShopPage />} />
+                  <Route path="/battle" element={<PvE />} />
                   <Route path="/*" element={<Navigate to="/" />} />
                 </>
               ) : (
