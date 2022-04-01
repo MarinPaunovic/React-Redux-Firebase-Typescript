@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleChat } from "../../redux/chat/chatActions";
+import { toggleChat } from "../../redux/chat/chatSlice";
 import { RootState } from "../../redux/rootReducer";
 import CustomButton from "../custom-button/customButton";
 import { ChatIconStyle } from "../styled-components/chatIconStyle";

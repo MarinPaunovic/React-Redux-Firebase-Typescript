@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../../db/db";
-import { setUser } from "../../redux/user/userActions";
+import { setUserAction } from "../../redux/user/userSlice";
 import CustomButton from "../custom-button/customButton";
 import FormInput from "../form-input/formInput";
 import { RegisterStyle } from "../styled-components/registerStyle";
@@ -17,7 +17,7 @@ const RegisterComponent = () => {
     e.preventDefault();
     if (password === confirmPassword) {
       createUserWithEmailAndPassword(auth, email, password).then(({ user }) => {
-        dispatch(setUser({ email, username, id: user.uid }));
+        dispatch(setUserAction({ email, username, id: user.uid }));
       });
       setEmail("");
       setUsername("");

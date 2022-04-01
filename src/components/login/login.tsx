@@ -5,7 +5,7 @@ import { auth, signInWithGoogle } from "../../db/db";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/user/userActions";
+import { setUserAction } from "../../redux/user/userSlice";
 import { RegisterStyle } from "../styled-components/registerStyle";
 
 const LoginComponent = () => {
@@ -47,7 +47,7 @@ const LoginComponent = () => {
           onClick={() =>
             signInWithGoogle().then(({ user }) => {
               dispatch(
-                setUser({ email: user.email, id: user.uid, username: "" })
+                setUserAction({ email: user.email, id: user.uid, username: "" })
               );
             })
           }

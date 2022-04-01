@@ -3,7 +3,7 @@ import Logout from "./logout/logout";
 
 import { RootState } from "../redux/rootReducer";
 import { Link } from "react-router-dom";
-import { setTheme } from "../redux/theme/themeActions";
+import { setThemeAction } from "../redux/theme/themeSlice";
 import { NavbarStyle } from "./styled-components/navbarStyle";
 import PlayerStatisticComponent from "./playerStatistic/playerStatisticComponent";
 
@@ -26,14 +26,14 @@ const Navbar = () => {
       {theme && theme === "dark" ? (
         <button
           className="material-icons-outlined"
-          onClick={() => dispatch(setTheme("light"))}
+          onClick={() => dispatch(setThemeAction("light"))}
         >
           light_mode
         </button>
       ) : (
         <button
           className="material-icons-outlined"
-          onClick={() => dispatch(setTheme("dark"))}
+          onClick={() => dispatch(setThemeAction("dark"))}
         >
           dark_mode
         </button>

@@ -103,4 +103,14 @@ export const ChatStyle = styled.div`
   .SendMessageButton:hover {
     cursor: pointer;
   }
+  .DeleteMessage {
+    position: absolute;
+    align-self: start;
+    background-color: purple;
+    color: pink;
+    border: none;
+  }
+  .DeleteMessage span:hover {
+    cursor: pointer;
+  }
 `;

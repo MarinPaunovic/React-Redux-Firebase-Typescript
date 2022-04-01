@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import CustomButton from "../custom-button/customButton";
 import FormInput from "../form-input/formInput";
-import { setUsername as setUsern } from "../../redux/user/userActions";
+import { setUsernameAction as setUsern } from "../../redux/user/userSlice";
 import { UsernameStyle } from "../styled-components/usernameStyle";
 
 const UsernameComponent = () => {

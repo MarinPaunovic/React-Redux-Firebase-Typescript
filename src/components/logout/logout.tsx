@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 
 import { auth } from "../../db/db";
 import { playerLogout } from "../../redux/player/playerSlice";
-import { logoutAction } from "../../redux/user/userActions";
+import { logout } from "../../redux/user/userSlice";
 import CustomButton from "../custom-button/customButton";
 
 const Logout = () => {
@@ -10,7 +10,7 @@ const Logout = () => {
 
   const handleLogout = () => {
     auth.signOut();
-    dispatch(logoutAction());
+    dispatch(logout());
     dispatch(playerLogout());
   };
 
